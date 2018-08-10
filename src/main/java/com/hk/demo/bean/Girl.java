@@ -1,8 +1,9 @@
-package com.hk.demo;
+package com.hk.demo.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 /**
  * @author 何康
@@ -15,6 +16,9 @@ public class Girl {
     private Integer id;
 
     private String cupSize;
+
+    @Min(value = 18,message = "不能添加未成年少女")
+    private Integer age;
 
     public Integer getId() {
         return id;
@@ -40,6 +44,14 @@ public class Girl {
         this.age = age;
     }
 
-    private Integer age;
+    @Override
+    public String toString() {
+        return "Girl{" +
+                "id=" + id +
+                ", cupSize='" + cupSize + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public Girl(){}
 }

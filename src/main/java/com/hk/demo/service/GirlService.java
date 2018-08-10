@@ -1,5 +1,7 @@
-package com.hk.demo;
+package com.hk.demo.service;
 
+import com.hk.demo.repository.GirlRepository;
+import com.hk.demo.bean.Girl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

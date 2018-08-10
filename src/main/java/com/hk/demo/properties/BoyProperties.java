@@ -1,4 +1,4 @@
-package com.hk.demo;
+package com.hk.demo.properties;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

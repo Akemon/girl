@@ -1,5 +1,6 @@
-package com.hk.demo;
+package com.hk.demo.controller;
 
+import com.hk.demo.properties.BoyProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;

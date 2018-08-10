@@ -1,5 +1,6 @@
-package com.hk.demo;
+package com.hk.demo.repository;
 
+import com.hk.demo.bean.Girl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

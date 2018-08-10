@@ -1,12 +1,18 @@
-package com.hk.demo;
+package com.hk.demo.controller;
 
+import com.hk.demo.bean.Girl;
+import com.hk.demo.bean.Result;
+import com.hk.demo.repository.GirlRepository;
+import com.hk.demo.service.GirlService;
+import com.hk.demo.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author 何康
@@ -26,34 +32,37 @@ public class GirlController {
      * @return
      */
     @GetMapping(value = "/getAllGirls")
-    public List<Girl> girlList(){
-        return girlRepository.findAll();
+    public Result<List<Girl>> girlList(){
+        return ResultUtil.success(girlRepository.findAll());
     }
 
     /**
      * 添加女生
-     * @param cupSize
-     * @param age
      * @return
      */
     @GetMapping(value = "/addGirls")
-    public Girl girlAdd(@RequestParam("cupSize")String cupSize,
-                          @RequestParam("age") Integer age){
-        Girl girl =new Girl();
-        girl.setCupSize(cupSize);
-        girl.setAge(age);
-        return girlRepository.save(girl);
+    public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+//            System.out.print(bindingResult.getFieldError().getDefaultMessage());
+//            return null;
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     /**
      * 通过id查找女生
-     * @param id
      * @return
      */
+//    @GetMapping(value="findGirls")
+//    public Girl findGirl(@RequestParam("id") Integer id){
+//       return girlRepository.findById(id).orElse(null);
+//    }
     @GetMapping(value="findGirls")
-    public Girl findGirl(@RequestParam("id") Integer id){
-       return girlRepository.findById(id).orElse(null);
+    public Girl findGirl(Girl girl){
+        return girlRepository.findById(girl.getId()).orElse(null);
     }
+
 
     /**
      * 通过年龄查找女生
