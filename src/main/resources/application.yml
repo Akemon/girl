@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: prod
+
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dbgirl?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      #create表示程序每次执行都会创建表，如果之前存在数据将被清除
+      #update 同样也会创建表，但是如果表存在，数据不会被清除
+      ddl-auto: update
+    show-sql: true
