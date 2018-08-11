@@ -2,6 +2,7 @@ package com.hk.demo.controller;
 
 import com.hk.demo.bean.Girl;
 import com.hk.demo.bean.Result;
+import com.hk.demo.exception.GirlException;
 import com.hk.demo.repository.GirlRepository;
 import com.hk.demo.service.GirlService;
 import com.hk.demo.util.ResultUtil;
@@ -45,7 +46,7 @@ public class GirlController {
         if(bindingResult.hasErrors()){
 //            System.out.print(bindingResult.getFieldError().getDefaultMessage());
 //            return null;
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
+            return ResultUtil.error(100,bindingResult.getFieldError().getDefaultMessage());
         }
         return ResultUtil.success(girlRepository.save(girl));
     }
@@ -104,6 +105,16 @@ public class GirlController {
     @GetMapping(value = "insertTwoGirl")
     public void insertTwoGirl(){
         girlService.insertTwo();
+    }
+
+
+    /***
+     * 业务需求：当查询女生时，如果年龄小于18岁，输出还未成年，如果年龄10岁以下，输出还在上小学
+     * 可能还会有很多很多的判断，此时需要对这种异常进行统一处理
+     */
+    @GetMapping(value = "getSpecialGirl")
+    public Result getSpecialGirl(Girl girl)throws GirlException {
+        return ResultUtil.success(girlService.getSpecialGirl(girl.getId()));
     }
 
 }

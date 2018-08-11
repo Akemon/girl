@@ -62,6 +62,7 @@ public class HttpAspect {
     //获取方法返回值的内容
     @AfterReturning(returning = "object",pointcut = "publicCheck()")
     public void doAfterReturning(Object object){
+        //如果controller的方法没有返回值，即object为null,调用toString会产生nullPointerException
         logger.info("response={}",object.toString());
     }
 }
